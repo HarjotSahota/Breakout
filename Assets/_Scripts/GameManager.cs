@@ -31,12 +31,15 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     private void FireBall()
     {
+        AudioManager.instance.PlaySfx("Fire");
         ball.FireBall();
     }
 
     public void OnBrickDestroyed(Vector3 position)
     {
         // fire audio here
+        AudioManager.instance.PlaySfx("Brick");
+        // implement particle effect here
         PlayHitEffects(position);
         // add camera shake here
 
@@ -53,6 +56,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     {
         maxLives--;
         // update lives on HUD here
+        AudioManager.instance.PlaySfx("Miss");
         // game over UI if maxLives < 0, then exit to main menu after delay
         ball.ResetBall();
     }
