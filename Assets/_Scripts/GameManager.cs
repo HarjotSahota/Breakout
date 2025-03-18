@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
 {
@@ -8,6 +9,9 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     public ParticleSystem ExplosionParticles; 
     public ParticleSystem FlashParticles;
 
+
+    private int brick = 0;
+    [SerializeField] private BrickCounterUI brickCounter;
 
     private int currentBrickCount;
     private int totalBrickCount;
@@ -35,6 +39,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         // fire audio here
         PlayHitEffects(position);
         // add camera shake here
+
+        // implementing coin text
+        brick ++;
+        brickCounter.UpdateScore(brick);
+
         currentBrickCount--;
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
         if(currentBrickCount == 0) SceneHandler.Instance.LoadNextScene();
